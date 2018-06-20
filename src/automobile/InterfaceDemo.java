@@ -3,7 +3,7 @@ package automobile;
 public class InterfaceDemo implements CarsInterface, BMWCarsInterface {
 	
 	/*
-	 * A class which extends an interface must implement all of its methods
+	 * A class which implements an interface must implement all of its methods
 	 * 
 	 */
 
