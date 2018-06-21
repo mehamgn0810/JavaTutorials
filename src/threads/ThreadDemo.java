@@ -2,7 +2,7 @@ package threads;
 
 class MyClass extends Thread {
 	
-	// Extend Thread class and implement run() method
+	// Extend Thread class and override run() method
 
 	@Override
 	public void run() {
