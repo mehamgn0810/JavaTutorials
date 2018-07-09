@@ -20,7 +20,7 @@ public class StringMethods {
 		System.out.println("Starts with check 1: " + str.startsWith("This"));
 		System.out.println("Starts with check 2: " + str.startsWith("is"));
 		System.out.println("Ends with check 1: " + str.endsWith("string"));
-		System.out.println("Ends with check 2: " + str.endsWith("is"));
+		System.out.println("Ends with check 2: " + str.endsWith("str"));
 		System.out.println("Check contents are equal: " + str1.equals(str2));
 		System.out.println("Check contents are equal: " + str1.equals(str3));
 		//if the sub string is not present, it returns -1
