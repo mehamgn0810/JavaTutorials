@@ -1,9 +1,9 @@
-package exercises;
+package understandingclasses;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@SuppressWarnings("unused")
 public class GetDateTime {
 
 	public static void main(String[] args) {
