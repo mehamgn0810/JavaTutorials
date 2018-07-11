@@ -2,6 +2,7 @@ package understandingclasses;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -10,52 +11,92 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExcelUtility {
 
-	public static void readExcel(String pathName, String fileName, String sheetName) throws IOException {
+	private static Workbook wBook;
+	private static Sheet sheet;
 
-		Workbook wb = null;
+	public static void setExcelInstance(String path, String fileName, String sheetName) throws IOException {
 
-		// Create an object of File class to open xlsx file
-		File f = new File(pathName + fileName);
+		File f = new File(path + fileName);
 		FileInputStream fis = new FileInputStream(f);
 
 		String fileExt = fileName.substring(fileName.indexOf("."));
 
 		if (fileExt.equals(".xlsx")) {
-			wb = new XSSFWorkbook(fis);
+			wBook = new XSSFWorkbook(fis);
 		} else if (fileExt.equals(".xls")) {
-			wb = new HSSFWorkbook(fis);
+			wBook = new HSSFWorkbook(fis);
 		}
 
-		Sheet mySheet = wb.getSheet(sheetName);
-		int firstRowNum = mySheet.getFirstRowNum();
-		System.out.println("First Row Number ==> " + firstRowNum);
+		sheet = wBook.getSheet(sheetName);
+	}
 
-		int lastRowNum = mySheet.getLastRowNum();
-		System.out.println("Last Row Number ==> " + lastRowNum);
+	public static Object[][] readExcel() throws IOException {
 
-		int rowsCount = lastRowNum - firstRowNum + 1;
-		System.out.println("Rows Count ==> " + rowsCount);
+		int lastRowNum = sheet.getLastRowNum();
 
-		for (int i = 0; i < rowsCount; i++) {
-			Row row = mySheet.getRow(i);
+		Object[][] data = new Object[lastRowNum][sheet.getRow(0).getLastCellNum()];
 
-			for (int j = 0; j < row.getLastCellNum(); j++) {
-				Cell cell = row.getCell(j);
-				if (cell != null) {
-					String cellValue = cell.getStringCellValue();
-					System.out.println("Value of Row " + i + " Column " + j + " is: " + cellValue);
-				}
-
+		for (int i = 0; i < lastRowNum; i++) {
+			for (int j = 0; j < sheet.getRow(0).getLastCellNum(); j++) {
+				data[i][j] = sheet.getRow(i + 1).getCell(j).toString();
 			}
 		}
 
+		return data;
 	}
-	
-	public static void writeExcel(String pathName, String fileName, String sheetName, String writeData) throws IOException {
+
+	public static Object[][] readExcelWithBoundary(String tableName)
+			throws IOException {
+
+		Cell[] boundaryCells = getBoundaryCells(tableName);
+		
+		int firstRow = boundaryCells[0].getRowIndex();
+		int lastRow = boundaryCells[1].getRowIndex();
+		int rowsCount = lastRow - firstRow;
+
+		int firstCell = boundaryCells[0].getColumnIndex();
+		int lastCell = boundaryCells[1].getColumnIndex();
+		int cellsCount = lastCell - firstCell - 1;
+
+		Object[][] testdata = new Object[rowsCount][cellsCount];
+
+		for (int i = 0; i < rowsCount; i++) {
+			for (int j = 0; j < cellsCount; j++) {
+				testdata[i][j] = sheet.getRow(i+firstRow+1).getCell(j+firstCell+1).getStringCellValue();
+			}
+		}
+
+		return testdata;
+	}
+
+	public static Cell[] getBoundaryCells(String tableName) {
+
+		Cell[] cells = new Cell[2];
+		String pos = "begin";
+
+		for (Row row : sheet) {
+			for (Cell cell : row) {
+				if (tableName.equals(cell.getStringCellValue())) {
+					if (pos.equals("begin")) {
+						cells[0] = cell;
+						pos = "end";
+					} else if (pos.equals("end")) {
+						cells[1] = cell;
+					}
+				}
+			}
+		}
+
+		return cells;
+	}
+
+	public static void writeExcel(String pathName, String fileName, String sheetName, String writeData)
+			throws IOException {
 
 		Workbook wb = null;
 
@@ -73,23 +114,23 @@ public class ExcelUtility {
 
 		Sheet mySheet = wb.getSheet(sheetName);
 		int firstRowNum = mySheet.getFirstRowNum();
-		
+
 		int lastRowNum = mySheet.getLastRowNum();
-		
+
 		int rowsCount = lastRowNum - firstRowNum + 1;
-		
-		for(int i=0; i<lastRowNum; i++) {
-			
+
+		for (int i = 0; i < lastRowNum; i++) {
+
 			Row row = mySheet.getRow(i);
 			Cell cell = row.createCell(5);
 			cell.setCellValue(writeData);
 		}
-		
+
 		fis.close();
-		
+
 		FileOutputStream fos = new FileOutputStream(f);
 		wb.write(fos);
-		
+
 		fos.close();
 	}
 
