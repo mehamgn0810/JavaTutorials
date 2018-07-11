@@ -19,7 +19,6 @@ public class Aggregation {
 		
 		v1.start();
 		p1.startVehicle();
-		
 	}
 }
 
