@@ -2,7 +2,7 @@ package programs;
 
 import java.util.ArrayList;
 
-public class FindDuplicates {
+public class FindDuplicatesBruteForceMethod {
 
 	public static void main(String[] args) {
 
