@@ -31,11 +31,13 @@ public class Casting
 {
     public static void main (String [] args) 
     {
-        Animal animal = new Animal();
+        Animal animal = new Dog();
         //Dog dog = (Dog)animal; //ClassCastException
+        
         
         if(animal instanceof Dog) {
         	System.out.println("animal can be casted to Dog");
+        	Dog dog = (Dog)animal;
         }else {
         	System.out.println("animal cannot be casted to Dog");
         }
