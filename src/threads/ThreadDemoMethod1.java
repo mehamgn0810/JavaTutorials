@@ -1,5 +1,6 @@
 package threads;
 
+//Extending Thread Class
 class MyClass extends Thread {
 	
 	// Extend Thread class and override run() method
@@ -14,7 +15,7 @@ class MyClass extends Thread {
 	
 }
 
-public class ThreadDemo {
+public class ThreadDemoMethod1 {
 	public static void main(String[] args) {
 		MyClass thread1 = new MyClass();
 		thread1.start();
