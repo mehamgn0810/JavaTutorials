@@ -18,6 +18,7 @@ public class SetsDemo {
 		set.add("Audi");
 		set.add("Honda");
 		set.add("Honda");
+		set.add(null);
 		
 		// System.out.println(set);
 		System.out.println("Hash");

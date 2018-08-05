@@ -12,6 +12,7 @@ public class MapsDemo {
 		map.put(1, "BMW");
 		map.put(6, "Audi");
 		map.put(4, "Honda");
+		map.put(null, "Hero");
 		
 		String value1 = map.get(1);
 		System.out.println(value1);
@@ -21,5 +22,7 @@ public class MapsDemo {
 		map.put(4, "Merc");
 		String value2 = map.get(4);
 		System.out.println(value2);
+		
+		System.out.println(map.get(null));
 	}
 }

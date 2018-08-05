@@ -12,7 +12,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class ExcelUtility {
+public class ExcelUtility{
 
 	private static Workbook wBook;
 	private static Sheet sheet;
@@ -20,6 +20,9 @@ public class ExcelUtility {
 	public static void setExcelInstance(String path, String fileName, String sheetName) throws IOException {
 
 		File f = new File(path + fileName);
+		System.out.println(f.isDirectory());
+		System.out.println(f.isFile());
+		System.out.println(f.canRead());
 		FileInputStream fis = new FileInputStream(f);
 
 		String fileExt = fileName.substring(fileName.indexOf("."));
@@ -115,7 +118,7 @@ public class ExcelUtility {
 
 		int lastRowNum = mySheet.getLastRowNum();
 
-		int rowsCount = lastRowNum - firstRowNum + 1;
+		//int rowsCount = lastRowNum - firstRowNum + 1;
 
 		for (int i = 0; i < lastRowNum; i++) {
 

@@ -6,6 +6,15 @@ import java.util.Arrays;
 public class ArrayTest {
 
 	public static void main(String[] args) {
+		
+		Object[] obj = new Object[3];
+		obj[0] = "string";
+		obj[1] = 123;
+		
+		//int x = obj[0];
+		
+		System.out.println(obj[0]);
+		System.out.println(obj[1]);
 
 		int[] arr;
 		arr = new int[5];
@@ -13,6 +22,7 @@ public class ArrayTest {
 		arr[4] = 1;
 		arr[3] = 2;
 		arr[2] = 3;
+	
 		
 		System.out.println(arr[4]);
 		System.out.println(arr[0]);

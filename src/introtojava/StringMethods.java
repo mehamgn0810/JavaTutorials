@@ -28,7 +28,7 @@ public class StringMethods {
 		System.out.println("Check if string is empty 1: " + str.isEmpty());
 		System.out.println("Check if string is empty 2: " + str4.isEmpty());
 		System.out.println("Trim the leading and trailing spaces: " + str5.trim());
-		System.out.println("Replace Example: " + str6.replace('e', 'a'));
+		System.out.println("Replace Example: " + str.replace('e', 'a'));
 		
 		System.out.println("Substring Example 1: " + str.substring(5));
 		System.out.println("Substring Example 2: " + str.substring(5, 10));

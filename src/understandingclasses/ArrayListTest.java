@@ -34,8 +34,11 @@ public class ArrayListTest {
 		System.out.println(l1);
 		
 		l.addAll(2,l1);
+		System.out.println(l);
 		
 		System.out.println(l.set(2, 123));	
+		
+		System.out.println(l);
 		
 		
 	}
