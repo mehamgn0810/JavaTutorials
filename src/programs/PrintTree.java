@@ -4,7 +4,7 @@ public class PrintTree {
 
 	public static void main(String[] args) {
 
-		int n = 50;
+		int n = 5;
 		int space = n - 2;
 
 		for (int i = 1; i <= n; i++) {

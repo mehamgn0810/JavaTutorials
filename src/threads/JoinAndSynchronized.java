@@ -14,8 +14,8 @@ public class JoinAndSynchronized {
 			@Override
 			public void run() {
 				for (int i = 0; i < 10000; i++) {
-					//count++;
-					inccount();
+					count++;
+					//inccount();
 				}
 			}
 		});
@@ -25,8 +25,8 @@ public class JoinAndSynchronized {
 			@Override
 			public void run() {
 				for (int i = 0; i < 10000; i++) {
-					//count++;
-					inccount();
+					count++;
+					//inccount();
 				}
 			}
 		});
